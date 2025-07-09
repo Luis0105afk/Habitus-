@@ -1,0 +1,36 @@
+ ======================= VENTANA INFORMACIÓN HÁBITO NUEVO =======================
+def mostrar_info_habito(nombre_habito):
+    info = habitos_info.get(nombre_habito, {})
+    ventana_info = tk.Toplevel()
+    ventana_info.title(f"Nivel 1 - {nombre_habito}")
+    ventana_info.attributes('-fullscreen', True)
+    ventana_info.configure(bg=COLOR_FONDO)
+
+    header = tk.Frame(ventana_info, bg=COLOR_AZUL_SUAVE, height=100)
+    header.pack(fill="x")
+
+    tk.Button(header, text="←", font=("Arial", 20), bg=COLOR_AZUL_SUAVE, relief="flat", command=ventana_info.destroy).place(x=20, y=30)
+    tk.Label(header, text=f"Nivel 1 - {nombre_habito}", font=("Arial", 32, "bold"), bg=COLOR_AZUL_SUAVE, fg=COLOR_TEXTO).pack(pady=20)
+
+    cuerpo = tk.Frame(ventana_info, bg=COLOR_FONDO)
+    cuerpo.pack(pady=60)
+
+    tk.Label(cuerpo, text=f"Tiempo sugerido: {info.get('tiempo', '')}", font=("Arial", 22), bg=COLOR_FONDO, fg=COLOR_TEXTO).pack(pady=10)
+    tk.Label(cuerpo, text=f"Días recomendados: {info.get('dias', '')}", font=("Arial", 22), bg=COLOR_FONDO, fg=COLOR_TEXTO).pack(pady=10)
+    tk.Label(cuerpo, text=info.get('descripcion', ''), font=("Arial", 18), wraplength=800, justify="center", bg=COLOR_FONDO, fg=COLOR_TEXTO).pack(pady=20)
+
+    tk.Button(
+        cuerpo,
+        text="Aceptar",
+        font=("Arial", 18, "bold"),
+        bg=COLOR_VERDE_SUAVE,
+        fg=COLOR_TEXTO,
+        width=15,
+        height=2,
+        command=ventana_info.destroy
+    ).pack(pady=30)
+
+    ventana_info.bind("<Escape>", lambda e: ventana_info.attributes("-fullscreen", False))
+
+
+
